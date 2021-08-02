@@ -2,9 +2,9 @@ from django.shortcuts import render
 from rest_framework import filters, viewsets
 from rest_framework.permissions import AllowAny, IsAdminUser
 
-from books.models import Author, Book
+from books.models import Author, Book, Genre
 from books.serializers import (AuthorSerializer, BookListSerializer,
-                               BookSerializer)
+                               BookSerializer, GenreSerializer)
 
 # Create your views here.
 
@@ -31,8 +31,6 @@ class BookViewset(viewsets.ModelViewSet):
 
 
 class AuthorViewset(viewsets.ModelViewSet):
-    def get_permissions(self):
-        return super().get_permissions()
 
     def get_permissions(self):
         perm = []
@@ -45,3 +43,16 @@ class AuthorViewset(viewsets.ModelViewSet):
 
     def get_serializer_class(self, *args, **kwargs):
         return AuthorSerializer
+
+class GenreViewset(viewsets.ModelViewSet):
+    def get_permissions(self):
+        perm = []
+        if self.action == 'list' or self.action == 'retrieve':
+            perm.append(AllowAny())
+        else:
+            perm.append(IsAdminUser())
+        return perm
+    queryset = Genre.objects.all()
+
+    def get_serializer_class(self, *args, **kwargs):
+        return GenreSerializer

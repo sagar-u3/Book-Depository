@@ -13,11 +13,17 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from book_depository_be.settings import BASE_DIR
+import os
 from django.contrib import admin
 from django.urls import include, path
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
     path('api/', include('books.urls'))
 ]
+
+urlpatterns += static('uploads/book_covers/', document_root=os.path.join(BASE_DIR, 'uploads/book_covers'))
+urlpatterns += static('uploads/author_photos/', document_root=os.path.join(BASE_DIR, 'uploads/author_photos/'))

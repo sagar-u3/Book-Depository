@@ -7,6 +7,6 @@ from accounts.serializers import RegisterSerializer
 # Create your views here.
 
 
-class RegisterViewset(viewsets.ViewSet, mixins.CreateModelMixin):
+class RegisterViewset(viewsets.GenericViewSet, mixins.CreateModelMixin):
     permission_classes = [AllowAny]
     serializer_class = RegisterSerializer
