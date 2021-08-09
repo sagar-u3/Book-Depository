@@ -8,7 +8,7 @@ function GenreTile(props) {
     return <Card style={{ width: '18rem' }}>
         <Card.Body>
             <Card.Title>{props.genre.name}</Card.Title>
-            <Button variant="primary" as={Link} to={'/genres/'+props.key} >View Books</Button>
+            <Button variant="primary" as={Link} to={'/genres/'+props.genre.id+"/books"} >View Books</Button>
         </Card.Body>
     </Card>;
 }

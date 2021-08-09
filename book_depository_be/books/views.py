@@ -20,7 +20,12 @@ class BookViewset(viewsets.ModelViewSet):
         else:
             perm.append(IsAdminUser())
         return perm
-    queryset = Book.objects.all()
+    def get_queryset(self):
+        user = self.request.user
+        if self.request.query_params.get('author'):
+            return Book.objects.filter(author=self.request.query_params.get('author'))
+        if self.request.query_params.get('author'):
+            return Book.objects.filter(genre=self.request.query_params.get('genre'))
 
     def get_serializer_class(self, *args, **kwargs):
         if self.action == 'list':

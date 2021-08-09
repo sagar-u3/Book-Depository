@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col, Row } from 'react-bootstrap';
-import { books_url } from '../../api_urls';
+import { base_url, books_url } from '../../api_urls';
 import BookTile from './BookTile';
 
 class Books extends React.Component {

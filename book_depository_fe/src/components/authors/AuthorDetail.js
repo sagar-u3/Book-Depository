@@ -1,8 +1,8 @@
-import { Button } from 'bootstrap';
 import React from 'react'
-import { Container, Image, ListGroup, } from 'react-bootstrap';
+import { Container, Image } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button'
 import { Link } from 'react-router-dom';
-import { authors_url, books_url } from '../../api_urls';
+import { authors_url } from '../../api_urls';
 
 export default class AuthorDetail extends React.Component {
     constructor(props) {
@@ -34,7 +34,7 @@ export default class AuthorDetail extends React.Component {
                 {this.state.about}
             </p>
             <br />
-            <Button as={Link} to={`/books?author=${this.state.id}`}>View Books</Button>
+            <Button as={Link} to={`/authors/${this.state.id}/books`}>View Books</Button>
         </Container>
     }
 }

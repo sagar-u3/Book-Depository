@@ -30,7 +30,7 @@ class Authors extends React.Component {
     render() {
         return (
             <Row xs={1} md={5} className="g-4">{this.state.authors.map((author, index) => (
-                <Col><AuthorTile key={index} author={author} /></Col>
+                <Col><AuthorTile key={author.id} author={author} /></Col>
             ))}</Row>
         );
     }

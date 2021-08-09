@@ -10,6 +10,8 @@ import Genres from './components/genres/Genre';
 import BookDetail from './components/books/BookDetail';
 import Signup from './components/login-signup/Signup';
 import AuthorDetail from './components/authors/AuthorDetail';
+import GenreBookList from './components/genres/GenreBookList';
+import AuthorBookList from './components/authors/AuthorBookList';
 
 class App extends React.Component {
   constructor(props) {
@@ -26,10 +28,10 @@ class App extends React.Component {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-                <Nav.Link as={Link} to="/" exact>Home</Nav.Link>
-                <Nav.Link as={Link} to="/books" exact>Books</Nav.Link>
-                <Nav.Link as={Link} to="/authors" exact>Authors</Nav.Link>
-                <Nav.Link as={Link} to="/genres" exact>Genres</Nav.Link>
+                <Nav.Link as={Link} to="/" >Home</Nav.Link>
+                <Nav.Link as={Link} to="/books" >Books</Nav.Link>
+                <Nav.Link as={Link} to="/authors" >Authors</Nav.Link>
+                <Nav.Link as={Link} to="/genres" >Genres</Nav.Link>
               </Nav>
               <Navbar.Text>
                 Signed in as: {localStorage.getItem('name')}
@@ -42,17 +44,19 @@ class App extends React.Component {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/books" exact component={Books} />
-          <Route path="/books/:id" component={BookDetail} />
+          <Route path="/books/:id" exact component={BookDetail} />
           <Route path="/authors" exact component={Authors} />
-          <Route path="/authors/:id" component={AuthorDetail} />
+          <Route path="/authors/:id" exact component={AuthorDetail} />
+          <Route path="/authors/:id/books" component={AuthorBookList} />
           <Route path="/genres" exact component={Genres} />
+          <Route path="/genres/:id/books" exact component={GenreBookList} />
         </Switch>
       </BrowserRouter >);
     }
     else {
       return <BrowserRouter>
         <Switch>
-          <Route path="/login" exact component={Login} />
+          <Route path="/" component={Login} />
           <Route path="/signup" exact component={Signup} />
         </Switch>
       </BrowserRouter>
