@@ -26,6 +26,7 @@ class BookViewset(viewsets.ModelViewSet):
             return Book.objects.filter(author=self.request.query_params.get('author'))
         if self.request.query_params.get('author'):
             return Book.objects.filter(genre=self.request.query_params.get('genre'))
+        return Book.objects.all()
 
     def get_serializer_class(self, *args, **kwargs):
         if self.action == 'list':
