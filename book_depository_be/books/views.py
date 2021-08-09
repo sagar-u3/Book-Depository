@@ -11,7 +11,7 @@ from books.serializers import (AuthorSerializer, BookListSerializer,
 
 class BookViewset(viewsets.ModelViewSet):
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
-    search_fields = ['name', ]
+    search_fields = ['name', 'description']
 
     def get_permissions(self):
         perm = []
@@ -20,11 +20,12 @@ class BookViewset(viewsets.ModelViewSet):
         else:
             perm.append(IsAdminUser())
         return perm
+
     def get_queryset(self):
         user = self.request.user
         if self.request.query_params.get('author'):
             return Book.objects.filter(author=self.request.query_params.get('author'))
-        if self.request.query_params.get('author'):
+        if self.request.query_params.get('genre'):
             return Book.objects.filter(genre=self.request.query_params.get('genre'))
         return Book.objects.all()
 
@@ -37,6 +38,8 @@ class BookViewset(viewsets.ModelViewSet):
 
 
 class AuthorViewset(viewsets.ModelViewSet):
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['name', 'about']
 
     def get_permissions(self):
         perm = []
@@ -50,7 +53,11 @@ class AuthorViewset(viewsets.ModelViewSet):
     def get_serializer_class(self, *args, **kwargs):
         return AuthorSerializer
 
+
 class GenreViewset(viewsets.ModelViewSet):
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['name', ]
+
     def get_permissions(self):
         perm = []
         if self.action == 'list' or self.action == 'retrieve':

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col, Row } from 'react-bootstrap';
-import { base_url, books_url } from '../../api_urls';
+import { books_url } from '../../api_urls';
 import BookTile from './BookTile';
 
 class Books extends React.Component {
@@ -17,7 +17,6 @@ class Books extends React.Component {
             .then(
                 data => {
                     this.setState({ books: data })
-                    console.log(data)
                 }
             )
             .catch(
